@@ -47,7 +47,7 @@
       margin: auto;
     }
 
-    /* 導覽列 */
+
     nav {
       background: rgba(11, 33, 53, .97);
       position: sticky;
@@ -521,6 +521,104 @@
         font-size: 24px;
       }
     }
+
+    
+/* 成果展示圖片 */
+.screenshot-box,
+.screenshot-slider {
+  position: relative;
+  background: #eaf1f5;
+  overflow: hidden;
+}
+
+.screenshot-box a,
+.screenshot-slide a {
+  display: block;
+}
+
+.screenshot-box img,
+.screenshot-slide img {
+  display: block;
+  width: 100%;
+  height: 250px;
+  object-fit: contain;
+  object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.screenshot-box img:hover,
+.screenshot-slide img:hover {
+  transform: scale(1.025);
+}
+
+/* 多圖片切換 */
+.screenshot-slide {
+  display: none;
+}
+
+.screenshot-slide.active {
+  display: block;
+}
+
+.slider-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  padding: 10px;
+  background: #f0f6f8;
+}
+
+.slider-controls button {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #cbdde5;
+  background: white;
+  border-radius: 50%;
+  color: #174d60;
+  font-size: 17px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.slider-controls button:hover {
+  background: #20bfa8;
+  border-color: #20bfa8;
+  color: white;
+}
+
+.slide-counter {
+  color: #526d7b;
+  font-size: 13px;
+  font-weight: 700;
+  min-width: 38px;
+  text-align: center;
+}
+
+/* 成果分類英文標籤 */
+.demo-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #119b8b;
+  margin-bottom: 6px;
+}
+
+.showcase-hint {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 13px;
+  color: #718591;
+}
+
+@media (max-width: 600px) {
+  .screenshot-box img,
+  .screenshot-slide img {
+    height: 210px;
+  }
+}
+
   </style>
 </head>
 
@@ -730,112 +828,225 @@
     </div>
   </section>
 
-  <!-- 系統成果展示 -->
-  <section id="demo">
-    <div class="container">
+ 
+<!-- 系統成果展示 -->
+<section id="demo">
+  <div class="container">
 
-      <span class="section-label">SYSTEM SHOWCASE</span>
-      <h2 class="section-title">系統實際成果展示</h2>
+    <span class="section-label">SYSTEM SHOWCASE</span>
+    <h2 class="section-title">系統實際成果展示</h2>
 
-      <p class="section-description">
-        展示 AI 智能健檢報告系統的實際操作介面，
-        包含報告管理、AI 分析及來賓端查詢等功能。
-      </p>
+    <p class="section-description">
+      展示 AI 智能健檢報告系統的實際操作介面，
+      包含醫師端報告管理、AI 綜合分析、健康風險評估、
+      來賓端報告查詢及語音朗讀功能。
+    </p>
 
-      <div class="demo-grid">
+    <div class="demo-grid">
 
-        <div class="demo-card">
-          <div class="demo-preview">
-            <div class="preview-icon">🖥️</div>
-            <span>系統首頁截圖預留位置</span>
-          </div>
-          <div class="demo-card-content">
-            <h3>01｜系統首頁與登入</h3>
-            <p>
-              展示系統入口及醫師、
-              來賓角色的使用介面。
-            </p>
-          </div>
+      <!-- 01 系統首頁與登入 -->
+      <div class="demo-card">
+        <div class="screenshot-box">
+          <a href="系統登入.png" target="_blank">
+            <img src="系統登入.png"
+                 alt="AI 智能健檢報告系統登入畫面"
+                 loading="lazy">
+          </a>
         </div>
 
-        <div class="demo-card">
-          <div class="demo-preview">
-            <div class="preview-icon">📁</div>
-            <span>報告上傳畫面預留位置</span>
-          </div>
-          <div class="demo-card-content">
-            <h3>02｜健檢報告上傳</h3>
-            <p>
-              展示醫師端文件上傳、
-              分類管理及報告處理介面。
-            </p>
-          </div>
+        <div class="demo-card-content">
+          <span class="demo-label">SYSTEM LOGIN</span>
+          <h3>01｜系統首頁與登入</h3>
+          <p>
+            系統提供帳號登入及註冊功能，
+            並依照醫師與來賓兩種使用者角色，
+            提供不同的功能操作介面。
+          </p>
         </div>
-
-        <div class="demo-card">
-          <div class="demo-preview">
-            <div class="preview-icon">🧠</div>
-            <span>AI 分析畫面預留位置</span>
-          </div>
-          <div class="demo-card-content">
-            <h3>03｜AI 智能分析</h3>
-            <p>
-              展示 AI 產生的分析摘要、
-              AiScore 與風險分級結果。
-            </p>
-          </div>
-        </div>
-
-        <div class="demo-card">
-          <div class="demo-preview">
-            <div class="preview-icon">📝</div>
-            <span>醫師審閱畫面預留位置</span>
-          </div>
-          <div class="demo-card-content">
-            <h3>04｜醫師審閱與編輯</h3>
-            <p>
-              展示醫師確認、編輯及
-              發布健檢報告的操作介面。
-            </p>
-          </div>
-        </div>
-
-        <div class="demo-card">
-          <div class="demo-preview">
-            <div class="preview-icon">📋</div>
-            <span>來賓查詢畫面預留位置</span>
-          </div>
-          <div class="demo-card-content">
-            <h3>05｜健檢報告查詢</h3>
-            <p>
-              展示來賓端報告查閱、
-              分類及分析結果呈現功能。
-            </p>
-          </div>
-        </div>
-
-        <div class="demo-card">
-          <div class="demo-preview">
-            <div class="preview-icon">🌐</div>
-            <span>語音及語言功能截圖預留位置</span>
-          </div>
-          <div class="demo-card-content">
-            <h3>06｜語音與語言功能</h3>
-            <p>
-              展示報告語音朗讀，
-              以及網站介面語言切換功能。
-            </p>
-          </div>
-        </div>
-
       </div>
 
-      <div class="demo-note">
-        目前為展示版面，實際系統截圖將於後續加入。
+      <!-- 02 醫師報告上傳 -->
+      <div class="demo-card">
+        <div class="screenshot-box">
+          <a href="醫師上傳.png" target="_blank">
+            <img src="醫師上傳.png"
+                 alt="醫師端健檢報告上傳畫面"
+                 loading="lazy">
+          </a>
+        </div>
+
+        <div class="demo-card-content">
+          <span class="demo-label">REPORT UPLOAD</span>
+          <h3>02｜健檢報告上傳</h3>
+          <p>
+            醫師可輸入受檢者識別資料，
+            選擇健檢科別並上傳報告檔案，
+            進行後續資料管理與 AI 分析。
+          </p>
+        </div>
+      </div>
+
+      <!-- 03 AI 綜合分析 -->
+      <div class="demo-card">
+        <div class="screenshot-slider">
+
+          <div class="screenshot-slide active">
+            <a href="AI 分析上半部.png" target="_blank">
+              <img src="AI 分析上半部.png"
+                   alt="AI 健康趨勢比較與整體風險評分"
+                   loading="lazy">
+            </a>
+          </div>
+
+          <div class="screenshot-slide">
+            <a href="AI 分析下半部.png" target="_blank">
+              <img src="AI 分析下半部.png"
+                   alt="AI 健康風險排名與科別評估"
+                   loading="lazy">
+            </a>
+          </div>
+
+          <div class="slider-controls">
+            <button type="button"
+                    class="slider-prev"
+                    aria-label="上一張圖片">❮</button>
+            <span class="slide-counter">1 / 2</span>
+            <button type="button"
+                    class="slider-next"
+                    aria-label="下一張圖片">❯</button>
+          </div>
+
+        </div>
+
+        <div class="demo-card-content">
+          <span class="demo-label">AI HEALTH ANALYSIS</span>
+          <h3>03｜AI 綜合分析與風險評估</h3>
+          <p>
+            整合各科健檢分析結果，
+            提供健康趨勢比較、風險排名、
+            AiScore 評分及風險等級，
+            協助使用者掌握重要健康資訊。
+          </p>
+        </div>
+      </div>
+
+      <!-- 04 醫師審閱與編輯 -->
+      <div class="demo-card">
+        <div class="screenshot-slider">
+
+          <div class="screenshot-slide active">
+            <a href="醫師編輯上半部.png" target="_blank">
+              <img src="醫師編輯上半部.png"
+                   alt="醫師檢查結果審閱與異常標示"
+                   loading="lazy">
+            </a>
+          </div>
+
+          <div class="screenshot-slide">
+            <a href="醫師編輯下半部.png" target="_blank">
+              <img src="醫師編輯下半部.png"
+                   alt="醫師審閱健康摘要及建議"
+                   loading="lazy">
+            </a>
+          </div>
+
+          <div class="slider-controls">
+            <button type="button"
+                    class="slider-prev"
+                    aria-label="上一張圖片">❮</button>
+            <span class="slide-counter">1 / 2</span>
+            <button type="button"
+                    class="slider-next"
+                    aria-label="下一張圖片">❯</button>
+          </div>
+
+        </div>
+
+        <div class="demo-card-content">
+          <span class="demo-label">DOCTOR REVIEW</span>
+          <h3>04｜醫師審閱與報告管理</h3>
+          <p>
+            醫師可檢視各項健檢數據與異常標示，
+            審閱 AI 產生的內容摘要及健康建議，
+            並管理報告的發布狀態。
+          </p>
+        </div>
+      </div>
+
+      <!-- 05 來賓端查詢 -->
+      <div class="demo-card">
+        <div class="screenshot-slider">
+
+          <div class="screenshot-slide active">
+            <a href="來賓首頁.png" target="_blank">
+              <img src="來賓首頁.png"
+                   alt="來賓端個人健康報告首頁"
+                   loading="lazy">
+            </a>
+          </div>
+
+          <div class="screenshot-slide">
+            <a href="檢查明細.png" target="_blank">
+              <img src="檢查明細.png"
+                   alt="來賓端理學檢查項目明細"
+                   loading="lazy">
+            </a>
+          </div>
+
+          <div class="slider-controls">
+            <button type="button"
+                    class="slider-prev"
+                    aria-label="上一張圖片">❮</button>
+            <span class="slide-counter">1 / 2</span>
+            <button type="button"
+                    class="slider-next"
+                    aria-label="下一張圖片">❯</button>
+          </div>
+
+        </div>
+
+        <div class="demo-card-content">
+          <span class="demo-label">PATIENT DASHBOARD</span>
+          <h3>05｜來賓端健檢報告查詢</h3>
+          <p>
+            來賓可透過個人首頁查看報告數量、
+            健康風險優先關注項目，
+            並進入各科檢查頁面查看詳細結果。
+          </p>
+        </div>
+      </div>
+
+      <!-- 06 語音朗讀 -->
+      <div class="demo-card">
+        <div class="screenshot-box">
+          <a href="語音朗讀.png" target="_blank">
+            <img src="語音朗讀.png"
+                 alt="AI 健康報告語音朗讀畫面"
+                 loading="lazy">
+          </a>
+        </div>
+
+        <div class="demo-card-content">
+          <span class="demo-label">TEXT TO SPEECH</span>
+          <h3>06｜AI 報告語音朗讀</h3>
+          <p>
+            將健檢報告內容透過 TTS 技術轉換為語音，
+            提供播放、暫停及停止功能，
+            提升健康資訊閱讀的便利性。
+          </p>
+        </div>
       </div>
 
     </div>
-  </section>
+
+    <p class="showcase-hint">
+      點擊圖片可查看完整畫面；
+      具有多張截圖的項目可使用左右箭頭切換。
+    </p>
+
+  </div>
+</section>
+
 
   <!-- 開發技術 -->
   <section id="technology" class="tech-section">
@@ -951,5 +1162,41 @@
     <p>Graduation Project · 2026</p>
   </footer>
 
+
+<script>
+document.querySelectorAll(".screenshot-slider").forEach(
+  function(slider) {
+
+    const slides = slider.querySelectorAll(".screenshot-slide");
+    const prev = slider.querySelector(".slider-prev");
+    const next = slider.querySelector(".slider-next");
+    const counter = slider.querySelector(".slide-counter");
+
+    let current = 0;
+
+    function showSlide(index) {
+      current = (index + slides.length) % slides.length;
+
+      slides.forEach(function(slide, i) {
+        slide.classList.toggle("active", i === current);
+      });
+
+      counter.textContent = (current + 1) + " / " + slides.length;
+    }
+
+    prev.addEventListener("click", function() {
+      showSlide(current - 1);
+    });
+
+    next.addEventListener("click", function() {
+      showSlide(current + 1);
+    });
+
+    showSlide(0);
+  }
+);
+</script>
+
+  
 </body>
 </html>
