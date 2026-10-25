@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 智能健檢報告系統｜專題成果展示</title>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Microsoft JhengHei", Arial, sans-serif;
+      color: #23364b;
+      background: #f5f8fc;
+      line-height: 1.8;
+    }
+    nav {
+      background: #132a42;
+      padding: 16px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    nav strong { color: #fff; }
+    nav a {
+      color: #d5e7f2;
+      text-decoration: none;
+      margin-left: 16px;
+      font-size: 14px;
+    }
+    header {
+      background: linear-gradient(135deg, #132a42, #176c79);
+      color: white;
+      padding: 100px 20px;
+      text-align: center;
+    }
+    header h1 { font-size: clamp(30px, 5vw, 48px); }
+    header p { color: #d2e7ed; }
+    .btn {
+      display: inline-block;
+      background: #23b7a3;
+      color: white;
+      padding: 12px 26px;
+      border-radius: 8px;
+      text-decoration: none;
+      margin: 12px 5px;
+    }
+    section {
+      max-width: 1050px;
+      margin: auto;
+      padding: 65px 20px;
+    }
+    h2 { color: #183e57; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+      margin-top: 25px;
+    }
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      box-shadow: 0 4px 20px #12345610;
+    }
+    .card h3 { color: #167e8a; }
+    .placeholder {
+      background: #e3ecf3;
+      border: 2px dashed #a5bacb;
+      border-radius: 12px;
+      padding: 65px 20px;
+      text-align: center;
+      color: #647b8d;
+    }
+    .tags span {
+      display: inline-block;
+      padding: 8px 14px;
+      background: #e0f1f1;
+      border-radius: 20px;
+      margin: 5px;
+    }
+    footer {
+      background: #132a42;
+      color: #d2e7ed;
+      text-align: center;
+      padding: 28px;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <strong>AI Health Report</strong>
+  <div>
+    <a href="#about">專題介紹</a>
+    <a href="#features">系統功能</a>
+    <a href="#demo">成果展示</a>
+    <a href="#technology">開發技術</a>
+  </div>
+</nav>
+
+<header>
+  <p>GRADUATION PROJECT · 2026</p>
+  <h1>AI 智能健檢報告系統</h1>
+  <p>結合人工智慧與醫療資訊技術，讓健康報告更容易理解。</p>
+  <a class="btn" href="#features">探索系統功能</a>
+  <a class="btn"
+     href="https://github.com/Huangyc0817/HealthCheckAI-eck"
+     target="_blank" rel="noopener noreferrer">
+    查看 GitHub 原始碼
+  </a>
+</header>
+
+<section id="about">
+  <h2>專題介紹</h2>
+  <p>
+    本專題以智慧健康照護為核心，
+    建立 AI 智能健檢報告系統。
+    透過報告上傳、文字擷取與 AI 分析，
+    協助醫師處理健康檢查資料，
+    並提供使用者易於閱讀的報告查詢介面。
+  </p>
+</section>
+
+<section id="features">
+  <h2>核心系統功能</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>01｜健檢報告上傳</h3>
+      <p>支援 PDF、DOCX 與 TXT 格式，擷取報告文字。</p>
+    </div>
+    <div class="card">
+      <h3>02｜AI 智能分析</h3>
+      <p>運用 AI 分析功能協助整理健檢結果。</p>
+    </div>
+    <div class="card">
+      <h3>03｜健康風險評估</h3>
+      <p>提供 AI 分數、風險程度及綜合分析結果。</p>
+    </div>
+    <div class="card">
+      <h3>04｜醫師審閱</h3>
+      <p>提供醫師確認分析內容及管理報告的功能。</p>
+    </div>
+    <div class="card">
+      <h3>05｜報告查詢</h3>
+      <p>讓使用者透過查詢介面閱讀已發布的健檢報告。</p>
+    </div>
+    <div class="card">
+      <h3>06｜語音與語言功能</h3>
+      <p>提供語音朗讀及介面語言切換功能。</p>
+    </div>
+  </div>
+</section>
+
+<section id="demo">
+  <h2>系統成果展示</h2>
+  <p>以下區域將展示實際系統操作畫面與功能流程。</p>
+  <div class="placeholder">
+    📷 系統截圖展示區
+    <p>後續加入首頁、報告上傳與 AI 分析結果截圖</p>
+  </div>
+</section>
+
+<section id="technology">
+  <h2>開發技術</h2>
+  <div class="tags">
+    <span>C#</span>
+    <span>ASP.NET Core MVC</span>
+    <span>.NET 8</span>
+    <span>Entity Framework Core</span>
+    <span>SQL Server</span>
+    <span>ML.NET</span>
+    <span>Bootstrap 5</span>
+    <span>HTML / CSS</span>
+  </div>
+</section>
+
+<footer>
+  AI 智能健檢報告系統｜畢業專題成果展示
+</footer>
+
+</body>
+</html>
+  
