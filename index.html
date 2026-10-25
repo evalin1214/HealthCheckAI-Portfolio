@@ -1,533 +1,954 @@
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI 智能健檢報告系統｜畢業專題成果展示</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI 智能健檢報告系統｜畢業專題成果展示">
+  <title>AI 智能健檢報告系統 | HealthCheck AI</title>
+
   <style>
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    :root {
+      --navy: #0b2135;
+      --navy-light: #143b51;
+      --teal: #20bfa8;
+      --teal-light: #74ead7;
+      --bg: #f3f7fa;
+      --white: #ffffff;
+      --text: #233b4d;
+      --muted: #687f8d;
+      --border: #dce7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
     body {
       margin: 0;
-      font-family: "Microsoft JhengHei", Arial, sans-serif;
-      background: #f4f7fb;
-      color: #23364b;
+      font-family: "Microsoft JhengHei", "Noto Sans TC",
+                   Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
       line-height: 1.8;
     }
-    a { text-decoration: none; }
-    img { max-width: 100%; display: block; border-radius: 12px; }
 
+    a {
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, 90%);
+      margin: auto;
+    }
+
+    /* 導覽列 */
     nav {
+      background: rgba(11, 33, 53, .97);
       position: sticky;
       top: 0;
-      z-index: 1000;
-      background: #11263d;
-      color: white;
-      padding: 16px 8%;
+      z-index: 100;
+      border-bottom: 1px solid #ffffff20;
+    }
+
+    .nav-inner {
+      min-height: 75px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      color: white;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: .5px;
+    }
+
+    .logo span {
+      color: var(--teal-light);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
       flex-wrap: wrap;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     }
 
-    nav .logo {
-      font-size: 28px;
+    .nav-links a {
+      color: #d2e0e8;
+      font-size: 14px;
+      transition: .25s;
+    }
+
+    .nav-links a:hover {
+      color: var(--teal-light);
+    }
+
+    /* 首頁 */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 650px;
+      display: flex;
+      align-items: center;
+      background:
+        radial-gradient(circle at 85% 25%,
+          #1f7e7f60, transparent 35%),
+        linear-gradient(135deg, #0b2135, #16485a);
+      color: white;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -120px;
+      bottom: -250px;
+      width: 550px;
+      height: 550px;
+      border: 1px solid #64e8d040;
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 65px #64e8d009,
+        0 0 0 130px #64e8d008;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      padding: 100px 0;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--teal-light);
+      font-size: 13px;
       font-weight: 700;
-      color: white;
+      letter-spacing: 3px;
+      margin-bottom: 22px;
     }
 
-    nav .menu a {
-      color: #dce8f2;
-      margin-left: 20px;
-      font-size: 15px;
-    }
-
-    header {
-      background: linear-gradient(135deg, #11263d, #15616d);
-      color: white;
-      text-align: center;
-      padding: 110px 20px 90px;
-    }
-
-    header .small {
-      font-size: 18px;
-      color: #d9eef3;
-      margin-bottom: 10px;
+    .hero h1 {
+      font-size: clamp(38px, 5vw, 66px);
+      line-height: 1.35;
       letter-spacing: 1px;
+      margin: 0 0 25px;
     }
 
-    header h1 {
-      font-size: clamp(34px, 5vw, 56px);
-      margin: 10px 0 20px;
+    .hero h1 span {
+      color: var(--teal-light);
     }
 
-    header p {
-      max-width: 900px;
-      margin: 0 auto 28px;
-      font-size: 21px;
-      color: #e4f2f4;
+    .hero p {
+      font-size: 18px;
+      color: #cee0e9;
+      max-width: 660px;
+      margin-bottom: 35px;
     }
 
-    .btn-group {
-      margin-top: 25px;
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
     }
 
     .btn {
       display: inline-block;
-      padding: 14px 28px;
-      border-radius: 10px;
-      margin: 8px;
-      font-weight: 600;
-      transition: 0.25s;
+      padding: 13px 27px;
+      border-radius: 9px;
+      font-size: 15px;
+      font-weight: 700;
+      transition: .25s;
     }
 
     .btn-primary {
-      background: #2fc4b2;
-      color: white;
+      color: #073b40;
+      background: var(--teal-light);
     }
 
-    .btn-secondary {
-      background: transparent;
-      border: 2px solid #cce8ea;
+    .btn-outline {
       color: white;
+      border: 1px solid #90acbc;
     }
 
     .btn:hover {
-      transform: translateY(-2px);
-      opacity: 0.95;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px #00000025;
     }
 
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 35px;
+      margin-top: 65px;
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--teal-light);
+      font-size: 28px;
+    }
+
+    .stat small {
+      color: #b9d1dc;
+      font-size: 13px;
+    }
+
+    /* 共用區塊 */
     section {
-      max-width: 1100px;
-      margin: auto;
-      padding: 75px 20px;
+      padding: 90px 0;
+    }
+
+    .section-label {
+      display: block;
+      color: #139889;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      margin-bottom: 10px;
     }
 
     .section-title {
-      font-size: 34px;
-      margin-bottom: 18px;
-      color: #163a57;
+      font-size: clamp(28px, 4vw, 38px);
+      color: var(--navy);
+      margin: 0 0 15px;
+      line-height: 1.4;
     }
 
-    .section-desc {
-      font-size: 18px;
-      color: #52697c;
-      margin-bottom: 30px;
+    .section-description {
+      color: var(--muted);
+      max-width: 760px;
+      margin-bottom: 40px;
     }
 
-    .card-grid {
+    /* 六大系統功能 */
+    .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 22px;
     }
 
-    .card {
+    .feature-card {
+      padding: 30px;
       background: white;
-      padding: 24px;
-      border-radius: 16px;
-      box-shadow: 0 6px 18px rgba(17, 38, 61, 0.08);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      transition: .3s;
     }
 
-    .card h3 {
-      margin-top: 0;
-      color: #15717b;
-      font-size: 20px;
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 35px #0b213515;
+      border-color: #83dbcb;
     }
 
-    .timeline {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
-      margin-top: 30px;
-    }
-
-    .step {
-      background: white;
-      border-left: 5px solid #2fc4b2;
-      padding: 18px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    }
-
-    .step strong {
-      display: block;
-      color: #163a57;
-      margin-bottom: 6px;
-      font-size: 18px;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 24px;
-    }
-
-    .gallery-item {
-      background: white;
-      padding: 16px;
-      border-radius: 16px;
-      box-shadow: 0 6px 18px rgba(17, 38, 61, 0.08);
-    }
-
-    .gallery-item h4 {
-      margin: 14px 0 8px;
-      color: #163a57;
-    }
-
-    .placeholder {
-      background: #eaf1f7;
-      border: 2px dashed #9fb6c9;
-      color: #658093;
-      text-align: center;
-      padding: 85px 18px;
-      border-radius: 12px;
-      font-size: 17px;
-    }
-
-    .tag-list {
+    .feature-icon {
+      width: 57px;
+      height: 57px;
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 20px;
+      align-items: center;
+      justify-content: center;
+      background: #e3f8f3;
+      border-radius: 14px;
+      color: #168c7d;
+      font-size: 25px;
+      margin-bottom: 22px;
     }
 
-    .tag {
-      background: #dff1f3;
-      color: #1b5963;
-      padding: 10px 16px;
-      border-radius: 999px;
-      font-size: 15px;
+    .feature-number {
+      font-size: 12px;
+      color: #1a9c8d;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .feature-card h3 {
+      margin: 8px 0 12px;
+      color: var(--navy);
+      font-size: 19px;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    /* 系統操作流程 */
+    .workflow-section {
+      background: var(--navy);
+      color: white;
+    }
+
+    .workflow-section .section-title {
+      color: white;
+    }
+
+    .workflow-section .section-description {
+      color: #b7ccd8;
+    }
+
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .workflow-card {
+      background: #17394e;
+      border: 1px solid #ffffff15;
+      border-radius: 16px;
+      padding: 25px;
+      position: relative;
+    }
+
+    .workflow-number {
+      color: var(--teal-light);
+      font-size: 35px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .workflow-card h3 {
+      font-size: 17px;
+      margin: 15px 0 10px;
+    }
+
+    .workflow-card p {
+      color: #bdd1db;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    /* 成果展示 */
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 26px;
+    }
+
+    .demo-card {
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 7px 22px #0b21350b;
+      transition: .3s;
+    }
+
+    .demo-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px #0b21351a;
+    }
+
+    .demo-preview {
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+      background:
+        linear-gradient(135deg, #e2f0f1, #d3e4ec);
+      color: #547987;
+      text-align: center;
+      padding: 25px;
+    }
+
+    .demo-preview .preview-icon {
+      font-size: 38px;
+    }
+
+    .demo-preview span {
+      font-size: 13px;
+    }
+
+    .demo-card-content {
+      padding: 24px;
+    }
+
+    .demo-card-content h3 {
+      color: var(--navy);
+      margin: 0 0 8px;
+      font-size: 19px;
+    }
+
+    .demo-card-content p {
+      color: var(--muted);
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .demo-note {
+      margin-top: 26px;
+      padding: 17px 20px;
+      background: #e4f4f1;
+      border-radius: 10px;
+      color: #28776e;
+      font-size: 14px;
+    }
+
+    /* 技術架構 */
+    .tech-section {
+      background: #eaf1f5;
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .tech-card {
+      padding: 28px;
+      border-radius: 17px;
+      background: white;
+      border: 1px solid var(--border);
+    }
+
+    .tech-card h3 {
+      color: var(--navy);
+      font-size: 18px;
+      margin: 0 0 20px;
+    }
+
+    .tech-tags {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tech-tag {
+      background: #e8f5f3;
+      color: #246b67;
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 13px;
       font-weight: 600;
     }
 
-    .two-col {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 28px;
-    }
-
-    .highlight-box {
+    /* 原始碼連結 */
+    .links-section {
       background: white;
-      padding: 24px;
-      border-radius: 16px;
-      box-shadow: 0 6px 18px rgba(17, 38, 61, 0.08);
+      text-align: center;
     }
 
-    ul {
-      padding-left: 20px;
+    .links-box {
+      background: linear-gradient(135deg, #0b2135, #16465a);
+      padding: 55px 25px;
+      border-radius: 22px;
+      color: white;
+    }
+
+    .links-box h2 {
+      font-size: 30px;
+      margin: 0 0 15px;
+    }
+
+    .links-box p {
+      color: #c6dce5;
+      margin-bottom: 27px;
     }
 
     footer {
-      background: #11263d;
-      color: #dbe9f2;
+      background: #07192a;
+      color: #a8becc;
+      padding: 30px 20px;
       text-align: center;
-      padding: 35px 20px;
-      margin-top: 30px;
+      font-size: 13px;
     }
 
-    footer a {
-      color: #97f0e2;
+    footer strong {
+      color: white;
     }
 
-    .note {
-      font-size: 14px;
-      color: #6b7d8a;
-      margin-top: 12px;
+    /* 手機與平板 */
+    @media (max-width: 900px) {
+      .features-grid,
+      .workflow-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-inner {
+        padding: 15px 0;
+        flex-direction: column;
+      }
     }
 
-    @media (max-width: 700px) {
-      nav {
+    @media (max-width: 600px) {
+      .features-grid,
+      .workflow-grid,
+      .demo-grid,
+      .tech-grid {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 65px 0;
+      }
+
+      .hero {
+        min-height: 570px;
+      }
+
+      .hero-content {
+        padding: 65px 0;
+      }
+
+      .hero-stats {
+        gap: 25px;
+        margin-top: 40px;
+      }
+
+      .nav-links {
+        gap: 13px;
         justify-content: center;
-        gap: 12px;
       }
-      nav .menu {
-        width: 100%;
-        text-align: center;
+
+      .nav-links a {
+        font-size: 12px;
       }
-      nav .menu a {
-        display: inline-block;
-        margin: 8px 10px;
-      }
-      header p {
-        font-size: 18px;
+
+      .links-box h2 {
+        font-size: 24px;
       }
     }
   </style>
 </head>
+
 <body>
 
+  <!-- 導覽列 -->
   <nav>
-    <div class="logo">AI Health Report</div>
-    <div class="menu">
-      <a href="#about">專題介紹</a>
-      <a href="#features">功能特色</a>
-      <a href="#workflow">系統流程</a>
-      <a href="#demo">成果展示</a>
-      <a href="#tech">技術架構</a>
-      <a href="#role">我的負責內容</a>
-      <a href="#future">未來展望</a>
+    <div class="container nav-inner">
+      <a href="#home" class="logo">
+        ✚ HealthCheck<span>AI</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#features">核心功能</a>
+        <a href="#workflow">系統流程</a>
+        <a href="#demo">成果展示</a>
+        <a href="#technology">開發技術</a>
+        <a href="#links">相關連結</a>
+      </div>
     </div>
   </nav>
 
-  <header>
-    <div class="small">GRADUATION PROJECT · 2026</div>
-    <h1>AI 智能健檢報告系統</h1>
-    <p>
-      結合人工智慧、醫療資訊與系統整合技術，
-      提供健檢報告上傳、文字擷取、AI 分析、風險評估與查詢功能，
-      讓健康資訊更容易理解與應用。
-    </p>
-    <div class="btn-group">
-      <a class="btn btn-primary" href="#demo">查看成果展示</a>
-      <a class="btn btn-secondary" href="https://github.com/Huangyc0817/HealthCheckAI-eck" target="_blank">GitHub 原始碼</a>
+  <!-- 首頁主視覺 -->
+  <header id="home" class="hero">
+    <div class="container">
+      <div class="hero-content">
+
+        <span class="eyebrow">
+          GRADUATION PROJECT · 2026
+        </span>
+
+        <h1>
+          AI 智能健檢<br>
+          <span>報告系統</span>
+        </h1>
+
+        <p>
+          結合人工智慧、醫療資訊與系統整合技術，
+          實現健檢報告數位化處理、AI 智能分析、
+          健康風險評估與報告查詢。
+        </p>
+
+        <div class="button-group">
+          <a href="#demo" class="btn btn-primary">
+            查看成果展示 →
+          </a>
+
+          <a
+            href="https://github.com/Huangyc0817/HealthCheckAI-eck"
+            class="btn btn-outline"
+            target="_blank"
+            rel="noopener noreferrer">
+            GitHub 原始碼 ↗
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <strong>06</strong>
+            <small>核心系統功能</small>
+          </div>
+
+          <div class="stat">
+            <strong>02</strong>
+            <small>使用者角色</small>
+          </div>
+
+          <div class="stat">
+            <strong>AI</strong>
+            <small>智能分析技術</small>
+          </div>
+        </div>
+
+      </div>
     </div>
   </header>
 
-  <section id="about">
-    <h2 class="section-title">專題介紹</h2>
-    <p class="section-desc">
-      本專題以智慧健康照護為核心，設計並實作「AI 智能健檢報告系統」。
-      系統可支援健檢報告上傳與文字擷取，並進一步透過 AI 進行報告分析、
-      風險評估與內容整理，協助醫師更有效率地處理健檢資訊，
-      同時提供使用者更容易閱讀與理解的報告查詢介面。
-    </p>
-    <div class="highlight-box">
-      <strong>專題目標</strong>
-      <ul>
-        <li>提升健檢報告資料整理與分析效率</li>
-        <li>協助醫師快速掌握健康資訊重點</li>
-        <li>讓一般使用者更容易理解健檢結果</li>
-        <li>結合 AI 與資訊系統提升健康照護應用價值</li>
-      </ul>
-    </div>
-  </section>
-
+  <!-- 六大核心功能 -->
   <section id="features">
-    <h2 class="section-title">核心功能特色</h2>
-    <p class="section-desc">
-      系統整合報告處理、AI 分析、風險評估與報告查詢等模組，建立完整的智慧健檢報告流程。
-    </p>
+    <div class="container">
 
-    <div class="card-grid">
-      <div class="card">
-        <h3>01｜健檢報告上傳</h3>
-        <p>支援 PDF、DOCX、TXT 格式報告上傳，方便醫師匯入不同來源的健檢資料。</p>
-      </div>
-      <div class="card">
-        <h3>02｜文字擷取處理</h3>
-        <p>擷取報告中的文字內容，作為後續 AI 分析與資訊整理的基礎。</p>
-      </div>
-      <div class="card">
-        <h3>03｜AI 智能分析</h3>
-        <p>透過 AI 自動分析健檢內容，產出摘要、建議與整體分析結果。</p>
-      </div>
-      <div class="card">
-        <h3>04｜風險等級評估</h3>
-        <p>提供 AiScore、等第與 Severity 風險分級，協助快速掌握健康狀況。</p>
-      </div>
-      <div class="card">
-        <h3>05｜醫師審閱與管理</h3>
-        <p>醫師可檢視、編輯與確認 AI 分析內容，再決定是否發布給使用者查閱。</p>
-      </div>
-      <div class="card">
-        <h3>06｜查詢、朗讀與語言功能</h3>
-        <p>提供使用者查詢介面，並支援語音朗讀與介面語言切換功能。</p>
+      <span class="section-label">CORE FEATURES</span>
+      <h2 class="section-title">六大核心系統功能</h2>
+
+      <p class="section-description">
+        整合健檢報告處理、人工智慧分析、
+        醫師審閱及使用者查詢，打造完整的智慧健康資訊系統。
+      </p>
+
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">📁</div>
+          <span class="feature-number">FEATURE 01</span>
+          <h3>健檢報告上傳</h3>
+          <p>
+            支援 PDF、DOCX 與 TXT 格式，
+            協助醫師匯入及管理健康檢查報告。
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📄</div>
+          <span class="feature-number">FEATURE 02</span>
+          <h3>報告文字擷取</h3>
+          <p>
+            自動讀取文件中的文字資訊，
+            作為後續 AI 分析與資料整理的基礎。
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🧠</div>
+          <span class="feature-number">FEATURE 03</span>
+          <h3>AI 智能分析</h3>
+          <p>
+            透過 AI 分析服務整理健檢內容，
+            產出摘要與相關分析資訊。
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <span class="feature-number">FEATURE 04</span>
+          <h3>健康風險評估</h3>
+          <p>
+            以 AiScore、等第及 Severity
+            呈現整體評估結果，輔助醫師掌握資訊。
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">👨‍⚕️</div>
+          <span class="feature-number">FEATURE 05</span>
+          <h3>醫師審閱與管理</h3>
+          <p>
+            提供分析結果審閱、編輯及發布管理，
+            由醫師確認內容後再開放查詢。
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🔊</div>
+          <span class="feature-number">FEATURE 06</span>
+          <h3>報告查詢與朗讀</h3>
+          <p>
+            提供來賓端查閱報告、
+            語音朗讀與介面語言切換功能。
+          </p>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <section id="workflow">
-    <h2 class="section-title">系統流程</h2>
-    <p class="section-desc">
-      透過以下流程，完成從健檢報告輸入到 AI 分析與結果查詢的完整應用。
-    </p>
+  <!-- 系統操作流程 -->
+  <section id="workflow" class="workflow-section">
+    <div class="container">
 
-    <div class="timeline">
-      <div class="step">
-        <strong>Step 1</strong>
-        醫師上傳健檢報告
-      </div>
-      <div class="step">
-        <strong>Step 2</strong>
-        系統進行文字擷取與資料整理
-      </div>
-      <div class="step">
-        <strong>Step 3</strong>
-        AI 進行報告分析與風險評估
-      </div>
-      <div class="step">
-        <strong>Step 4</strong>
-        醫師審閱、修正與確認內容
-      </div>
-      <div class="step">
-        <strong>Step 5</strong>
-        報告發布給使用者查詢
-      </div>
-      <div class="step">
-        <strong>Step 6</strong>
-        使用者查閱、朗讀與理解健康資訊
+      <span class="section-label">SYSTEM WORKFLOW</span>
+      <h2 class="section-title">系統操作流程</h2>
+
+      <p class="section-description">
+        從醫師上傳健檢報告，到 AI 自動分析、
+        醫師審閱及來賓端查詢，形成完整的資料處理流程。
+      </p>
+
+      <div class="workflow-grid">
+
+        <div class="workflow-card">
+          <div class="workflow-number">01</div>
+          <h3>醫師上傳報告</h3>
+          <p>將健檢文件上傳至系統。</p>
+        </div>
+
+        <div class="workflow-card">
+          <div class="workflow-number">02</div>
+          <h3>文字擷取</h3>
+          <p>解析文件並讀取健檢資訊。</p>
+        </div>
+
+        <div class="workflow-card">
+          <div class="workflow-number">03</div>
+          <h3>AI 分析</h3>
+          <p>產出分析摘要與健康風險評估。</p>
+        </div>
+
+        <div class="workflow-card">
+          <div class="workflow-number">04</div>
+          <h3>醫師審閱</h3>
+          <p>由醫師檢視與調整分析內容。</p>
+        </div>
+
+        <div class="workflow-card">
+          <div class="workflow-number">05</div>
+          <h3>發布報告</h3>
+          <p>確認內容後開放來賓端查詢。</p>
+        </div>
+
+        <div class="workflow-card">
+          <div class="workflow-number">06</div>
+          <h3>來賓查閱</h3>
+          <p>閱讀健檢報告並使用語音功能。</p>
+        </div>
+
       </div>
     </div>
   </section>
 
+  <!-- 系統成果展示 -->
   <section id="demo">
-    <h2 class="section-title">成果展示</h2>
-    <p class="section-desc">
-      以下區域可放入系統實際畫面，展示專題功能與介面成果。
-    </p>
+    <div class="container">
 
-    <div class="gallery">
-      <div class="gallery-item">
-        <div class="placeholder">放入首頁或登入畫面截圖</div>
-        <h4>系統首頁 / 登入畫面</h4>
-        <p>展示系統入口與整體介面風格。</p>
-      </div>
+      <span class="section-label">SYSTEM SHOWCASE</span>
+      <h2 class="section-title">系統實際成果展示</h2>
 
-      <div class="gallery-item">
-        <div class="placeholder">放入報告上傳頁面截圖</div>
-        <h4>健檢報告上傳</h4>
-        <p>展示醫師端上傳 PDF、DOCX、TXT 報告的功能。</p>
-      </div>
-
-      <div class="gallery-item">
-        <div class="placeholder">放入 AI 分析頁面截圖</div>
-        <h4>AI 分析結果</h4>
-        <p>展示 AI 摘要、風險評估與健康分數等分析內容。</p>
-      </div>
-
-      <div class="gallery-item">
-        <div class="placeholder">放入醫師審閱畫面截圖</div>
-        <h4>醫師審閱與編輯</h4>
-        <p>展示醫師端確認、編輯與發布報告的功能。</p>
-      </div>
-
-      <div class="gallery-item">
-        <div class="placeholder">放入使用者查詢頁面截圖</div>
-        <h4>使用者查詢介面</h4>
-        <p>展示來賓查詢與閱讀健檢報告的介面成果。</p>
-      </div>
-
-      <div class="gallery-item">
-        <div class="placeholder">放入語音/語言功能截圖</div>
-        <h4>語音朗讀與語言切換</h4>
-        <p>展示系統在可讀性與使用便利性上的延伸功能。</p>
-      </div>
-    </div>
-
-    <p class="note">
-      提醒：之後可將上述灰色區塊替換成真實系統截圖，網站完整度會大幅提升。
-    </p>
-  </section>
-
-  <section id="tech">
-    <h2 class="section-title">技術架構與使用技術</h2>
-    <p class="section-desc">
-      本專題整合後端開發、資料庫設計、AI 分析與介面建置等多項技術。
-    </p>
-
-    <div class="tag-list">
-      <div class="tag">C#</div>
-      <div class="tag">ASP.NET Core MVC</div>
-      <div class="tag">.NET 8</div>
-      <div class="tag">Entity Framework Core 8</div>
-      <div class="tag">SQL Server / LocalDB</div>
-      <div class="tag">ML.NET</div>
-      <div class="tag">Bootstrap 5</div>
-      <div class="tag">PdfPig</div>
-      <div class="tag">Xceed.Words.NET</div>
-      <div class="tag">System.Speech.Synthesis</div>
-      <div class="tag">LibreTranslate</div>
-      <div class="tag">HTML / CSS</div>
-    </div>
-  </section>
-
-  <section id="role">
-    <h2 class="section-title">我的負責內容</h2>
-    <div class="two-col">
-      <div class="highlight-box">
-        <h3>系統開發與整合</h3>
-        <ul>
-          <li>規劃專題功能與系統流程</li>
-          <li>設計醫師端與使用者端功能架構</li>
-          <li>整合報告上傳、文字擷取與資料顯示流程</li>
-          <li>建置前後端介面與功能串接</li>
-        </ul>
-      </div>
-      <div class="highlight-box">
-        <h3>資料與 AI 應用</h3>
-        <ul>
-          <li>設計資料表與報告管理機制</li>
-          <li>整合 AI 分析服務與結果呈現</li>
-          <li>實作 AiScore、Severity 與分析摘要顯示</li>
-          <li>規劃報告查詢、朗讀與語言切換等延伸功能</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section id="challenge">
-    <h2 class="section-title">專題亮點與挑戰</h2>
-    <div class="two-col">
-      <div class="highlight-box">
-        <h3>專題亮點</h3>
-        <ul>
-          <li>結合醫療資訊與 AI 應用，具備實務發展潛力</li>
-          <li>支援多種報告格式，提高系統彈性</li>
-          <li>從醫師端到使用者端形成完整流程</li>
-          <li>納入語音朗讀與介面切換，提升使用便利性</li>
-        </ul>
-      </div>
-      <div class="highlight-box">
-        <h3>開發挑戰</h3>
-        <ul>
-          <li>多格式健檢報告內容的擷取與整理</li>
-          <li>AI 分析結果與系統資料欄位的整合</li>
-          <li>醫師端與來賓端權限區分與流程設計</li>
-          <li>讓專業健康資訊呈現得更清楚易懂</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section id="future">
-    <h2 class="section-title">未來展望</h2>
-    <div class="highlight-box">
-      <ul>
-        <li>持續優化 AI 分析內容與準確性</li>
-        <li>增加更多健檢科別與數據分析項目</li>
-        <li>擴充多語系與可視化圖表功能</li>
-        <li>提升系統可用性與實務應用性</li>
-        <li>未來可進一步與醫療機構健檢流程整合</li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="links">
-    <h2 class="section-title">相關連結</h2>
-    <div class="highlight-box">
-      <p><strong>成果展示網站：</strong><br>
-        <a href="https://evalin1214.github.io/HealthCheckAI-Portfolio/" target="_blank">
-          https://evalin1214.github.io/HealthCheckAI-Portfolio/
-        </a>
+      <p class="section-description">
+        展示 AI 智能健檢報告系統的實際操作介面，
+        包含報告管理、AI 分析及來賓端查詢等功能。
       </p>
 
-      <p><strong>GitHub 原始碼：</strong><br>
-        <a href="https://github.com/Huangyc0817/HealthCheckAI-eck" target="_blank">
-          https://github.com/Huangyc0817/HealthCheckAI-eck
-        </a>
-      </p>
+      <div class="demo-grid">
+
+        <div class="demo-card">
+          <div class="demo-preview">
+            <div class="preview-icon">🖥️</div>
+            <span>系統首頁截圖預留位置</span>
+          </div>
+          <div class="demo-card-content">
+            <h3>01｜系統首頁與登入</h3>
+            <p>
+              展示系統入口及醫師、
+              來賓角色的使用介面。
+            </p>
+          </div>
+        </div>
+
+        <div class="demo-card">
+          <div class="demo-preview">
+            <div class="preview-icon">📁</div>
+            <span>報告上傳畫面預留位置</span>
+          </div>
+          <div class="demo-card-content">
+            <h3>02｜健檢報告上傳</h3>
+            <p>
+              展示醫師端文件上傳、
+              分類管理及報告處理介面。
+            </p>
+          </div>
+        </div>
+
+        <div class="demo-card">
+          <div class="demo-preview">
+            <div class="preview-icon">🧠</div>
+            <span>AI 分析畫面預留位置</span>
+          </div>
+          <div class="demo-card-content">
+            <h3>03｜AI 智能分析</h3>
+            <p>
+              展示 AI 產生的分析摘要、
+              AiScore 與風險分級結果。
+            </p>
+          </div>
+        </div>
+
+        <div class="demo-card">
+          <div class="demo-preview">
+            <div class="preview-icon">📝</div>
+            <span>醫師審閱畫面預留位置</span>
+          </div>
+          <div class="demo-card-content">
+            <h3>04｜醫師審閱與編輯</h3>
+            <p>
+              展示醫師確認、編輯及
+              發布健檢報告的操作介面。
+            </p>
+          </div>
+        </div>
+
+        <div class="demo-card">
+          <div class="demo-preview">
+            <div class="preview-icon">📋</div>
+            <span>來賓查詢畫面預留位置</span>
+          </div>
+          <div class="demo-card-content">
+            <h3>05｜健檢報告查詢</h3>
+            <p>
+              展示來賓端報告查閱、
+              分類及分析結果呈現功能。
+            </p>
+          </div>
+        </div>
+
+        <div class="demo-card">
+          <div class="demo-preview">
+            <div class="preview-icon">🌐</div>
+            <span>語音及語言功能截圖預留位置</span>
+          </div>
+          <div class="demo-card-content">
+            <h3>06｜語音與語言功能</h3>
+            <p>
+              展示報告語音朗讀，
+              以及網站介面語言切換功能。
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="demo-note">
+        目前為展示版面，實際系統截圖將於後續加入。
+      </div>
+
     </div>
   </section>
 
+  <!-- 開發技術 -->
+  <section id="technology" class="tech-section">
+    <div class="container">
+
+      <span class="section-label">TECHNOLOGY STACK</span>
+      <h2 class="section-title">系統開發技術</h2>
+
+      <p class="section-description">
+        系統以 ASP.NET Core MVC 為主要架構，
+        整合資料庫、文件擷取、AI 分析與輔助功能。
+      </p>
+
+      <div class="tech-grid">
+
+        <div class="tech-card">
+          <h3>前端介面 Frontend</h3>
+          <div class="tech-tags">
+            <span class="tech-tag">HTML5</span>
+            <span class="tech-tag">CSS3</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">Bootstrap 5</span>
+            <span class="tech-tag">Razor Views</span>
+          </div>
+        </div>
+
+        <div class="tech-card">
+          <h3>後端開發 Backend</h3>
+          <div class="tech-tags">
+            <span class="tech-tag">C#</span>
+            <span class="tech-tag">.NET 8</span>
+            <span class="tech-tag">ASP.NET Core MVC</span>
+            <span class="tech-tag">Entity Framework Core 8</span>
+          </div>
+        </div>
+
+        <div class="tech-card">
+          <h3>資料庫 Database</h3>
+          <div class="tech-tags">
+            <span class="tech-tag">SQL Server</span>
+            <span class="tech-tag">LocalDB</span>
+            <span class="tech-tag">Entity Framework</span>
+          </div>
+        </div>
+
+        <div class="tech-card">
+          <h3>AI 與文件處理 AI & Documents</h3>
+          <div class="tech-tags">
+            <span class="tech-tag">ML.NET</span>
+            <span class="tech-tag">PdfPig</span>
+            <span class="tech-tag">Xceed.Words.NET</span>
+          </div>
+        </div>
+
+        <div class="tech-card">
+          <h3>輔助服務 Additional Services</h3>
+          <div class="tech-tags">
+            <span class="tech-tag">System.Speech.Synthesis</span>
+            <span class="tech-tag">LibreTranslate</span>
+            <span class="tech-tag">Docker</span>
+          </div>
+        </div>
+
+        <div class="tech-card">
+          <h3>開發與版本管理 Tools</h3>
+          <div class="tech-tags">
+            <span class="tech-tag">Visual Studio 2022</span>
+            <span class="tech-tag">Git</span>
+            <span class="tech-tag">GitHub</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 相關連結 -->
+  <section id="links" class="links-section">
+    <div class="container">
+
+      <div class="links-box">
+
+        <span class="eyebrow">
+          EXPLORE THE PROJECT
+        </span>
+
+        <h2>探索完整專題成果</h2>
+
+        <p>
+          透過 GitHub 查看 AI 智能健檢報告系統的
+          原始程式碼與專案架構。
+        </p>
+
+        <a
+          href="https://github.com/Huangyc0817/HealthCheckAI-eck"
+          class="btn btn-primary"
+          target="_blank"
+          rel="noopener noreferrer">
+          查看 GitHub 原始碼 ↗
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 頁尾 -->
   <footer>
-    <p>AI 智能健檢報告系統｜畢業專題成果展示</p>
+    <strong>HealthCheck AI</strong>
     <p>
-      GitHub Pages：
-      <a href="https://evalin1214.github.io/HealthCheckAI-Portfolio/" target="_blank">
-        點我查看網站
-      </a>
+      AI 智能健檢報告系統｜畢業專題成果展示
     </p>
+    <p>Graduation Project · 2026</p>
   </footer>
 
 </body>
