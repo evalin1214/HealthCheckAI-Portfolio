@@ -1,187 +1,534 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI 智能健檢報告系統｜專題成果展示</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 智能健檢報告系統｜畢業專題成果展示</title>
   <style>
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: "Microsoft JhengHei", Arial, sans-serif;
+      background: #f4f7fb;
       color: #23364b;
-      background: #f5f8fc;
       line-height: 1.8;
     }
+    a { text-decoration: none; }
+    img { max-width: 100%; display: block; border-radius: 12px; }
+
     nav {
-      background: #132a42;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #11263d;
+      color: white;
       padding: 16px 8%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     }
-    nav strong { color: #fff; }
-    nav a {
-      color: #d5e7f2;
-      text-decoration: none;
-      margin-left: 16px;
-      font-size: 14px;
+
+    nav .logo {
+      font-size: 28px;
+      font-weight: 700;
+      color: white;
     }
+
+    nav .menu a {
+      color: #dce8f2;
+      margin-left: 20px;
+      font-size: 15px;
+    }
+
     header {
-      background: linear-gradient(135deg, #132a42, #176c79);
+      background: linear-gradient(135deg, #11263d, #15616d);
       color: white;
-      padding: 100px 20px;
       text-align: center;
+      padding: 110px 20px 90px;
     }
-    header h1 { font-size: clamp(30px, 5vw, 48px); }
-    header p { color: #d2e7ed; }
-    .btn {
-      display: inline-block;
-      background: #23b7a3;
-      color: white;
-      padding: 12px 26px;
-      border-radius: 8px;
-      text-decoration: none;
-      margin: 12px 5px;
+
+    header .small {
+      font-size: 18px;
+      color: #d9eef3;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
     }
-    section {
-      max-width: 1050px;
-      margin: auto;
-      padding: 65px 20px;
+
+    header h1 {
+      font-size: clamp(34px, 5vw, 56px);
+      margin: 10px 0 20px;
     }
-    h2 { color: #183e57; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 22px;
+
+    header p {
+      max-width: 900px;
+      margin: 0 auto 28px;
+      font-size: 21px;
+      color: #e4f2f4;
+    }
+
+    .btn-group {
       margin-top: 25px;
     }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      border-radius: 10px;
+      margin: 8px;
+      font-weight: 600;
+      transition: 0.25s;
+    }
+
+    .btn-primary {
+      background: #2fc4b2;
+      color: white;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid #cce8ea;
+      color: white;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 75px 20px;
+    }
+
+    .section-title {
+      font-size: 34px;
+      margin-bottom: 18px;
+      color: #163a57;
+    }
+
+    .section-desc {
+      font-size: 18px;
+      color: #52697c;
+      margin-bottom: 30px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
+    }
+
     .card {
       background: white;
-      padding: 25px;
-      border-radius: 14px;
-      box-shadow: 0 4px 20px #12345610;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(17, 38, 61, 0.08);
     }
-    .card h3 { color: #167e8a; }
-    .placeholder {
-      background: #e3ecf3;
-      border: 2px dashed #a5bacb;
+
+    .card h3 {
+      margin-top: 0;
+      color: #15717b;
+      font-size: 20px;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-top: 30px;
+    }
+
+    .step {
+      background: white;
+      border-left: 5px solid #2fc4b2;
+      padding: 18px;
       border-radius: 12px;
-      padding: 65px 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+    .step strong {
+      display: block;
+      color: #163a57;
+      margin-bottom: 6px;
+      font-size: 18px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 24px;
+    }
+
+    .gallery-item {
+      background: white;
+      padding: 16px;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(17, 38, 61, 0.08);
+    }
+
+    .gallery-item h4 {
+      margin: 14px 0 8px;
+      color: #163a57;
+    }
+
+    .placeholder {
+      background: #eaf1f7;
+      border: 2px dashed #9fb6c9;
+      color: #658093;
       text-align: center;
-      color: #647b8d;
+      padding: 85px 18px;
+      border-radius: 12px;
+      font-size: 17px;
     }
-    .tags span {
-      display: inline-block;
-      padding: 8px 14px;
-      background: #e0f1f1;
-      border-radius: 20px;
-      margin: 5px;
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
     }
+
+    .tag {
+      background: #dff1f3;
+      color: #1b5963;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+
+    .highlight-box {
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(17, 38, 61, 0.08);
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
     footer {
-      background: #132a42;
-      color: #d2e7ed;
+      background: #11263d;
+      color: #dbe9f2;
       text-align: center;
-      padding: 28px;
+      padding: 35px 20px;
+      margin-top: 30px;
+    }
+
+    footer a {
+      color: #97f0e2;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #6b7d8a;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 700px) {
+      nav {
+        justify-content: center;
+        gap: 12px;
+      }
+      nav .menu {
+        width: 100%;
+        text-align: center;
+      }
+      nav .menu a {
+        display: inline-block;
+        margin: 8px 10px;
+      }
+      header p {
+        font-size: 18px;
+      }
     }
   </style>
 </head>
 <body>
 
-<nav>
-  <strong>AI Health Report</strong>
-  <div>
-    <a href="#about">專題介紹</a>
-    <a href="#features">系統功能</a>
-    <a href="#demo">成果展示</a>
-    <a href="#technology">開發技術</a>
-  </div>
-</nav>
-
-<header>
-  <p>GRADUATION PROJECT · 2026</p>
-  <h1>AI 智能健檢報告系統</h1>
-  <p>結合人工智慧與醫療資訊技術，讓健康報告更容易理解。</p>
-  <a class="btn" href="#features">探索系統功能</a>
-  <a class="btn"
-     href="https://github.com/Huangyc0817/HealthCheckAI-eck"
-     target="_blank" rel="noopener noreferrer">
-    查看 GitHub 原始碼
-  </a>
-</header>
-
-<section id="about">
-  <h2>專題介紹</h2>
-  <p>
-    本專題以智慧健康照護為核心，
-    建立 AI 智能健檢報告系統。
-    透過報告上傳、文字擷取與 AI 分析，
-    協助醫師處理健康檢查資料，
-    並提供使用者易於閱讀的報告查詢介面。
-  </p>
-</section>
-
-<section id="features">
-  <h2>核心系統功能</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>01｜健檢報告上傳</h3>
-      <p>支援 PDF、DOCX 與 TXT 格式，擷取報告文字。</p>
+  <nav>
+    <div class="logo">AI Health Report</div>
+    <div class="menu">
+      <a href="#about">專題介紹</a>
+      <a href="#features">功能特色</a>
+      <a href="#workflow">系統流程</a>
+      <a href="#demo">成果展示</a>
+      <a href="#tech">技術架構</a>
+      <a href="#role">我的負責內容</a>
+      <a href="#future">未來展望</a>
     </div>
-    <div class="card">
-      <h3>02｜AI 智能分析</h3>
-      <p>運用 AI 分析功能協助整理健檢結果。</p>
-    </div>
-    <div class="card">
-      <h3>03｜健康風險評估</h3>
-      <p>提供 AI 分數、風險程度及綜合分析結果。</p>
-    </div>
-    <div class="card">
-      <h3>04｜醫師審閱</h3>
-      <p>提供醫師確認分析內容及管理報告的功能。</p>
-    </div>
-    <div class="card">
-      <h3>05｜報告查詢</h3>
-      <p>讓使用者透過查詢介面閱讀已發布的健檢報告。</p>
-    </div>
-    <div class="card">
-      <h3>06｜語音與語言功能</h3>
-      <p>提供語音朗讀及介面語言切換功能。</p>
-    </div>
-  </div>
-</section>
+  </nav>
 
-<section id="demo">
-  <h2>系統成果展示</h2>
-  <p>以下區域將展示實際系統操作畫面與功能流程。</p>
-  <div class="placeholder">
-    📷 系統截圖展示區
-    <p>後續加入首頁、報告上傳與 AI 分析結果截圖</p>
-  </div>
-</section>
+  <header>
+    <div class="small">GRADUATION PROJECT · 2026</div>
+    <h1>AI 智能健檢報告系統</h1>
+    <p>
+      結合人工智慧、醫療資訊與系統整合技術，
+      提供健檢報告上傳、文字擷取、AI 分析、風險評估與查詢功能，
+      讓健康資訊更容易理解與應用。
+    </p>
+    <div class="btn-group">
+      <a class="btn btn-primary" href="#demo">查看成果展示</a>
+      <a class="btn btn-secondary" href="https://github.com/Huangyc0817/HealthCheckAI-eck" target="_blank">GitHub 原始碼</a>
+    </div>
+  </header>
 
-<section id="technology">
-  <h2>開發技術</h2>
-  <div class="tags">
-    <span>C#</span>
-    <span>ASP.NET Core MVC</span>
-    <span>.NET 8</span>
-    <span>Entity Framework Core</span>
-    <span>SQL Server</span>
-    <span>ML.NET</span>
-    <span>Bootstrap 5</span>
-    <span>HTML / CSS</span>
-  </div>
-</section>
+  <section id="about">
+    <h2 class="section-title">專題介紹</h2>
+    <p class="section-desc">
+      本專題以智慧健康照護為核心，設計並實作「AI 智能健檢報告系統」。
+      系統可支援健檢報告上傳與文字擷取，並進一步透過 AI 進行報告分析、
+      風險評估與內容整理，協助醫師更有效率地處理健檢資訊，
+      同時提供使用者更容易閱讀與理解的報告查詢介面。
+    </p>
+    <div class="highlight-box">
+      <strong>專題目標</strong>
+      <ul>
+        <li>提升健檢報告資料整理與分析效率</li>
+        <li>協助醫師快速掌握健康資訊重點</li>
+        <li>讓一般使用者更容易理解健檢結果</li>
+        <li>結合 AI 與資訊系統提升健康照護應用價值</li>
+      </ul>
+    </div>
+  </section>
 
-<footer>
-  AI 智能健檢報告系統｜畢業專題成果展示
-</footer>
+  <section id="features">
+    <h2 class="section-title">核心功能特色</h2>
+    <p class="section-desc">
+      系統整合報告處理、AI 分析、風險評估與報告查詢等模組，建立完整的智慧健檢報告流程。
+    </p>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3>01｜健檢報告上傳</h3>
+        <p>支援 PDF、DOCX、TXT 格式報告上傳，方便醫師匯入不同來源的健檢資料。</p>
+      </div>
+      <div class="card">
+        <h3>02｜文字擷取處理</h3>
+        <p>擷取報告中的文字內容，作為後續 AI 分析與資訊整理的基礎。</p>
+      </div>
+      <div class="card">
+        <h3>03｜AI 智能分析</h3>
+        <p>透過 AI 自動分析健檢內容，產出摘要、建議與整體分析結果。</p>
+      </div>
+      <div class="card">
+        <h3>04｜風險等級評估</h3>
+        <p>提供 AiScore、等第與 Severity 風險分級，協助快速掌握健康狀況。</p>
+      </div>
+      <div class="card">
+        <h3>05｜醫師審閱與管理</h3>
+        <p>醫師可檢視、編輯與確認 AI 分析內容，再決定是否發布給使用者查閱。</p>
+      </div>
+      <div class="card">
+        <h3>06｜查詢、朗讀與語言功能</h3>
+        <p>提供使用者查詢介面，並支援語音朗讀與介面語言切換功能。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="workflow">
+    <h2 class="section-title">系統流程</h2>
+    <p class="section-desc">
+      透過以下流程，完成從健檢報告輸入到 AI 分析與結果查詢的完整應用。
+    </p>
+
+    <div class="timeline">
+      <div class="step">
+        <strong>Step 1</strong>
+        醫師上傳健檢報告
+      </div>
+      <div class="step">
+        <strong>Step 2</strong>
+        系統進行文字擷取與資料整理
+      </div>
+      <div class="step">
+        <strong>Step 3</strong>
+        AI 進行報告分析與風險評估
+      </div>
+      <div class="step">
+        <strong>Step 4</strong>
+        醫師審閱、修正與確認內容
+      </div>
+      <div class="step">
+        <strong>Step 5</strong>
+        報告發布給使用者查詢
+      </div>
+      <div class="step">
+        <strong>Step 6</strong>
+        使用者查閱、朗讀與理解健康資訊
+      </div>
+    </div>
+  </section>
+
+  <section id="demo">
+    <h2 class="section-title">成果展示</h2>
+    <p class="section-desc">
+      以下區域可放入系統實際畫面，展示專題功能與介面成果。
+    </p>
+
+    <div class="gallery">
+      <div class="gallery-item">
+        <div class="placeholder">放入首頁或登入畫面截圖</div>
+        <h4>系統首頁 / 登入畫面</h4>
+        <p>展示系統入口與整體介面風格。</p>
+      </div>
+
+      <div class="gallery-item">
+        <div class="placeholder">放入報告上傳頁面截圖</div>
+        <h4>健檢報告上傳</h4>
+        <p>展示醫師端上傳 PDF、DOCX、TXT 報告的功能。</p>
+      </div>
+
+      <div class="gallery-item">
+        <div class="placeholder">放入 AI 分析頁面截圖</div>
+        <h4>AI 分析結果</h4>
+        <p>展示 AI 摘要、風險評估與健康分數等分析內容。</p>
+      </div>
+
+      <div class="gallery-item">
+        <div class="placeholder">放入醫師審閱畫面截圖</div>
+        <h4>醫師審閱與編輯</h4>
+        <p>展示醫師端確認、編輯與發布報告的功能。</p>
+      </div>
+
+      <div class="gallery-item">
+        <div class="placeholder">放入使用者查詢頁面截圖</div>
+        <h4>使用者查詢介面</h4>
+        <p>展示來賓查詢與閱讀健檢報告的介面成果。</p>
+      </div>
+
+      <div class="gallery-item">
+        <div class="placeholder">放入語音/語言功能截圖</div>
+        <h4>語音朗讀與語言切換</h4>
+        <p>展示系統在可讀性與使用便利性上的延伸功能。</p>
+      </div>
+    </div>
+
+    <p class="note">
+      提醒：之後可將上述灰色區塊替換成真實系統截圖，網站完整度會大幅提升。
+    </p>
+  </section>
+
+  <section id="tech">
+    <h2 class="section-title">技術架構與使用技術</h2>
+    <p class="section-desc">
+      本專題整合後端開發、資料庫設計、AI 分析與介面建置等多項技術。
+    </p>
+
+    <div class="tag-list">
+      <div class="tag">C#</div>
+      <div class="tag">ASP.NET Core MVC</div>
+      <div class="tag">.NET 8</div>
+      <div class="tag">Entity Framework Core 8</div>
+      <div class="tag">SQL Server / LocalDB</div>
+      <div class="tag">ML.NET</div>
+      <div class="tag">Bootstrap 5</div>
+      <div class="tag">PdfPig</div>
+      <div class="tag">Xceed.Words.NET</div>
+      <div class="tag">System.Speech.Synthesis</div>
+      <div class="tag">LibreTranslate</div>
+      <div class="tag">HTML / CSS</div>
+    </div>
+  </section>
+
+  <section id="role">
+    <h2 class="section-title">我的負責內容</h2>
+    <div class="two-col">
+      <div class="highlight-box">
+        <h3>系統開發與整合</h3>
+        <ul>
+          <li>規劃專題功能與系統流程</li>
+          <li>設計醫師端與使用者端功能架構</li>
+          <li>整合報告上傳、文字擷取與資料顯示流程</li>
+          <li>建置前後端介面與功能串接</li>
+        </ul>
+      </div>
+      <div class="highlight-box">
+        <h3>資料與 AI 應用</h3>
+        <ul>
+          <li>設計資料表與報告管理機制</li>
+          <li>整合 AI 分析服務與結果呈現</li>
+          <li>實作 AiScore、Severity 與分析摘要顯示</li>
+          <li>規劃報告查詢、朗讀與語言切換等延伸功能</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="challenge">
+    <h2 class="section-title">專題亮點與挑戰</h2>
+    <div class="two-col">
+      <div class="highlight-box">
+        <h3>專題亮點</h3>
+        <ul>
+          <li>結合醫療資訊與 AI 應用，具備實務發展潛力</li>
+          <li>支援多種報告格式，提高系統彈性</li>
+          <li>從醫師端到使用者端形成完整流程</li>
+          <li>納入語音朗讀與介面切換，提升使用便利性</li>
+        </ul>
+      </div>
+      <div class="highlight-box">
+        <h3>開發挑戰</h3>
+        <ul>
+          <li>多格式健檢報告內容的擷取與整理</li>
+          <li>AI 分析結果與系統資料欄位的整合</li>
+          <li>醫師端與來賓端權限區分與流程設計</li>
+          <li>讓專業健康資訊呈現得更清楚易懂</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="future">
+    <h2 class="section-title">未來展望</h2>
+    <div class="highlight-box">
+      <ul>
+        <li>持續優化 AI 分析內容與準確性</li>
+        <li>增加更多健檢科別與數據分析項目</li>
+        <li>擴充多語系與可視化圖表功能</li>
+        <li>提升系統可用性與實務應用性</li>
+        <li>未來可進一步與醫療機構健檢流程整合</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="links">
+    <h2 class="section-title">相關連結</h2>
+    <div class="highlight-box">
+      <p><strong>成果展示網站：</strong><br>
+        <a href="https://evalin1214.github.io/HealthCheckAI-Portfolio/" target="_blank">
+          https://evalin1214.github.io/HealthCheckAI-Portfolio/
+        </a>
+      </p>
+
+      <p><strong>GitHub 原始碼：</strong><br>
+        <a href="https://github.com/Huangyc0817/HealthCheckAI-eck" target="_blank">
+          https://github.com/Huangyc0817/HealthCheckAI-eck
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <p>AI 智能健檢報告系統｜畢業專題成果展示</p>
+    <p>
+      GitHub Pages：
+      <a href="https://evalin1214.github.io/HealthCheckAI-Portfolio/" target="_blank">
+        點我查看網站
+      </a>
+    </p>
+  </footer>
 
 </body>
 </html>
-  
